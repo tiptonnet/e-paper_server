@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/static/style.css">  
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script src="/static/js/tinymce/js/tinymce/tinymce.min.js"></script>
@@ -15,17 +15,80 @@
         <body>
             <p><font size="18">| {{config[0]}} | {{config[1]}} | {{config[2]}} |</font></p>
             <div class="table-responsive text-nowrap">
-                <img src="/static/images/vendors.png"
-                style="float:left; margin-right:10px; border:none;"
-                alt="vendors"
-                title="Vendors" />
-                <li><font size="20">Item 1</font></li>
-                <li><font size="20">Item 2</font></li>
-                <li><font size="20">Item 3</font></li>
-                <li><font size="20">Item 4</font></li>
-                <li><font size="20">Item 5</font></li>
-                <li><font size="20">Item 6</font></li>
-                <li><font size="20">Item 7</font></li>
+                {% if local == 1: %}
+                <p><font size="18">Location: Isle 1B</font></p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col">SKU</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>1264</td>
+                            <td>ABC-976</td>
+                            <td>Special Widget</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>164</td>
+                            <td>ABC-945</td>
+                            <td>Widget</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>0</td>
+                            <td>DDC-908</td>
+                            <td>Bracket</td>
+                            <td>NOT Available</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                {% if local == 2: %}
+                <p><font size="18">Location: Isle 6A</font></p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col">SKU</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>12</td>
+                            <td>A976</td>
+                            <td>Wheel Bracket</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>1264</td>
+                            <td>C-945</td>
+                            <td>3/8 Nut</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>1234</td>
+                            <td>NC-918</td>
+                            <td>3/8 X 1 Bolt</td>
+                            <td>Available</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
             </div>
             <script>
                 $("#FilterStatus").change(function() {
