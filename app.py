@@ -26,9 +26,6 @@ def GetConfig():
         #print(x.text)
     return config
 
-config = GetConfig()
-print(config)
-
 @app.errorhandler(404) 
 def invalid_route(e):
 	return render_template(
@@ -42,8 +39,10 @@ app = Flask(__name__)
 
 @app.route('/<int:p>')
 def index(p):
+    config = GetConfig()
     return render_template(
-		'index.html'
+		'index.html',
+        config=config
 	)
 
 @app.route('/forward')
