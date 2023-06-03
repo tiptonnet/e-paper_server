@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+   <setting id="1">
+      <unitID>1</unitID>
+      <name>Cart 1</name>
+      <description>Optional</description>
+   </setting>
+
+</config>

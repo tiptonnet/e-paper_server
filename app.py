@@ -6,8 +6,28 @@ from flask_bootstrap import Bootstrap
 #from flask_nav import Nav
 #from flask_nav.elements import *
 from dominate.tags import img
+import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
+
+def GetConfig():
+  
+    # create element tree object
+    tree = ET.parse('static/config.xml')
+    #print(tree)
+    # get root element
+    root = tree.getroot()
+    #print(root)
+    #print(root[0].tag)
+    # create empty list for config items
+    config = []
+    for x in root[0]:
+        config.append(x.text)
+        #print(x.text)
+    return config
+
+config = GetConfig()
+print(config)
 
 @app.errorhandler(404) 
 def invalid_route(e):
