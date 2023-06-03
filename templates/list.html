@@ -1,0 +1,95 @@
+{% extends "index.html" %} {% block content %}
+<div class="table-responsive text-nowrap">
+    <form name="SearchForm" method="post" action="/Searchtemplate/{{p}}">
+        Search: <input type="text" name="qry"> <button type="submit">Search</button> Status
+        <select name="FilterStatus" id="FilterStatus">
+            <option value="a">All</option>
+            <option value="0" {% if fltr == "status" %}{% if fid == "0" %}selected{% endif %}{% endif %}>Pending</option>
+            <option value="1" {% if fltr == "status" %}{% if fid == "1" %}selected{% endif %}{% endif %}>Active</option>
+            <option value="2" {% if fltr == "status" %}{% if fid == "2" %}selected{% endif %}{% endif %}>On Hold</option>
+            <option value="3" {% if fltr == "status" %}{% if fid == "3" %}selected{% endif %}{% endif %}>Closed</option>
+            <option value="4" {% if fltr == "status" %}{% if fid == "4" %}selected{% endif %}{% endif %}>Approved</option>
+            <option value="5" {% if fltr == "status" %}{% if fid == "5" %}selected{% endif %}{% endif %}>Denied</option>
+        </select> Department
+        <select name="FilterDepartment" id="FilterDepartment">
+            <option value="a">All</option>
+            {% for dept in DepartmentDropDown %}
+                <option value = "{{dept.id}}" {% if fltr == "department" %}{% if fid | int == dept.id %}selected{% endif %}{% endif %}>{{dept.title}}</option>
+            {% endfor %}
+        </select>
+    </form>
+     {% if data != None: %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td><a href="{{prev_path}}">Prev</a></td>
+                <td></td>
+                <td><a href="{{next_path}}">Next</a></td>
+                <td><a href="/templateNew"><img src="/static/images/plus_new_512.png" title = "New" width="32px" height="32px" ></a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item 1</th>
+                <th scope="col">Item 2</th>
+                <th scope="col">Item 3</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Item in data %}
+            <tr>
+                <th scope="row">{{Item.id}}</th>
+                <td>{{Item.created_at}}</td>
+                <td>{{Item.subject}}</td>
+                <td>{{Item.firstname}} {{Item.lastname}}</td>
+                <td>{{statuses[Item.status]}}</td>
+                <td>
+                    <a href="/templateEdit/{{Item.id}}"><img title="Edit" width="24px" height="24px" src="/static/images/pencil-14.png"></a> |
+                    <a href="#"><img title="Delete" width="24px" height="24px" src="/static/images/clearall-icon.png"onclick="ConfirmDelete('{{Item.id}}', '{{Item.subject}}')"></a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td><a href="{{prev_path}}">Prev</a></td>
+                <td></td>
+                <td><a href="{{next_path}}">Next</a></td>
+                <td><a href="/templateNew"><img src="/static/images/plus_new_512.png" title = "New" width="32px" height="32px"></a></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+        <div style="font-size: larger; padding-left: 400px; padding-top: 50px;"> No records found <a href="/templateNew"><img src="/static/images/plus_new_512.png" title = "New" width="32px" height="32px" ></a></div>
+    {%endif%}
+</div>
+<script>
+    $("#FilterStatus").change(function() {
+        var id = $(this).val()
+        if (id == "a") {
+            window.location.href = "/template/0/1";
+            return true;
+        }
+        window.location.href = "/FilterTemplate/{{p}}/" + id + "/status";
+    });
+    $("#FilterDepartment").change(function() {
+        var id = $(this).val()
+        if (id == "a") {
+            window.location.href = "/template/0/1";
+            return true;
+        }
+        window.location.href = "/FilterTemplate/{{p}}/" + id + "/department";
+    });
+
+    function ConfirmDelete(id, name) {
+        if (confirm("Are you sure you want to Delete: " + name + "? This is permanent and can not be restored")) {
+            window.location.href = "/DeleteRecord/" + id + "/template"
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+
+<html>
+
+    <head>
+        <title>Surveillance</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/style.css">  
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="/static/js/tinymce/js/tinymce/tinymce.min.js"></script>
+    </head>
+
+        <body>
+            <div class="table-responsive text-nowrap">
+                <img src="/static/images/vendors.png"
+                style="float:left; margin-right:10px; border:none;"
+                alt="vendors"
+                title="Vendors" />
+                <li><font size="20"> Item 1</font></li>
+                <li><font size="20">Item 2</font></li>
+                <li><font size="20">Item 3</font></li>
+                <li><font size="20">Item 4</font></li>
+                <li><font size="20">Item 5</font></li>
+                <li><font size="20">Item 6</font></li>
+                <li><font size="20">Item 7</font></li>
+            </div>
+            <script>
+                $("#FilterStatus").change(function() {
+                    var id = $(this).val()
+                    if (id == "a") {
+                        window.location.href = "/template/0/1";
+                        return true;
+                    }
+                    window.location.href = "/FilterTemplate/{{p}}/" + id + "/status";
+                });
+                $("#FilterDepartment").change(function() {
+                    var id = $(this).val()
+                    if (id == "a") {
+                        window.location.href = "/template/0/1";
+                        return true;
+                    }
+                    window.location.href = "/FilterTemplate/{{p}}/" + id + "/department";
+                });
+            
+                function ConfirmDelete(id, name) {
+                    if (confirm("Are you sure you want to Delete: " + name + "? This is permanent and can not be restored")) {
+                        window.location.href = "/DeleteRecord/" + id + "/template"
+                    }
+                }
+            </script>
+
+
+        </body>
+
+</html>
